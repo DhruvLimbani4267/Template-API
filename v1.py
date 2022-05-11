@@ -1,7 +1,16 @@
 import uvicorn
 from fastapi import FastAPI
 from templates import temps,temps_list
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = ["*"],
+    allow_credentials = True,
+    allow_methods = ["*"],
+    allow_headers = ["*"]
+)
 
 @app.get("/templates/{template_name}")
 def get_template(template_name: str):
